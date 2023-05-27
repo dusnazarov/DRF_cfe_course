@@ -10,9 +10,13 @@
 #         fields = ['id','title','content','price', 'sale_price','my_discount']
     
 #     def get_my_discount(self, obj):
-#         print(obj.id)
-#         print(obj)
-#         print(obj.get_discount())
+#         # print(obj)
+#         # print(obj.id)
+#         # print(obj.title)
+#         # print(obj.price)
+#         # print(obj.sale_price)              
+#         # print(obj.get_discount)     
+                
 #         return obj.get_discount()  
     
 # 2)  ////////////////  Injest Data with Django Rest Framework Views   ///////////////////////

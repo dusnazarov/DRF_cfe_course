@@ -1,24 +1,50 @@
 
-from django.http import JsonResponse
-import json
-
 # 1)  ////////////////////////////////////////////////
+# from django.http import JsonResponse
+
 # def api_home(request, *args, **kwargs):
 #     return JsonResponse({"message":"Hi there, this is  your Django API response!!"})
 
 
 # 2) ////////////////////////////////////////////////
+# from django.http import JsonResponse
+
 # def api_home(request, *args, **kwargs):
 #     # print(dir(request))    
-#     # print(request.body)
-#     # print(request.GET)  # url query params    
-#     # return JsonResponse({"message":"Hi there, this is  your Django API response!!"})
+#     print(request.body)
+#     print(request.GET)  # url query params    
+#     return JsonResponse({"message": "Hi there, this is  your Django API response!!"})
+
+
+# 2') ////////////////////////////////////////////////
+# import json
+# from django.http import JsonResponse
+
+# def api_home(request, *args, **kwargs):   
     
-#     body = request.body  # byte strings of JSON data
+#     body = request.body   # byte strings of JSON data - b'{"message": "Hello world!!"}'
+#     print(body)     
 #     data = {}
         
 #     try:
-#         data = json.loads(body) # strings of JSON data -> Python Dict
+#         data = json.loads(body)  # strings of JSON data -> Python Dict - {'message': 'Hello world!!'}
+        
+#     except:
+#         pass
+#     print(data)      
+#     return JsonResponse(data)
+
+# 2' ') ////////////////////////////////////////////////
+# import json
+# from django.http import JsonResponse
+
+# def api_home(request, *args, **kwargs):   
+    
+#     body = request.body # byte strings of JSON data - b'{"message": "Hello world!!"}'      
+#     data = {}
+        
+#     try:
+#         data = json.loads(body) # strings of JSON data -> Python Dict - {'message': 'Hello world!!'}       
 #     except:
 #         pass
 #     print(data)
@@ -55,7 +81,7 @@ import json
     
 #     data = {}
 #     if model_data:
-#         data = model_to_dict(model_data, fields=['id','title'])        
+#         data = model_to_dict(model_data, fields=['id','title','price'])        
    
 #     return JsonResponse(data)
 
@@ -66,11 +92,12 @@ import json
 # from rest_framework.decorators import api_view 
 
 
-# @api_view(["GET"])
+# @api_view(["GET","POST"])
 # def api_home(request, *args, **kwargs):
 #     """ 
 #     DRF API View
 #     """
+  
 #     model_data = Product.objects.all().order_by("?").first() 
     
 #     data = {}
@@ -82,7 +109,6 @@ import json
 
 # 6) ///////////// Django Rest Framework Model Serializer ////////////////////////
 # from products.models import Product
-# from django.forms.models import model_to_dict
 # from rest_framework.response import Response
 # from rest_framework.decorators import api_view 
 # from products.serializers import ProductSerializer
@@ -93,12 +119,40 @@ import json
     
 #     data = {}
 #     if instance:        
-#         data = ProductSerializer(instance).data 
-   
+#         data = ProductSerializer(instance).data    
 #     return Response(data)
 
-
 # 7) ///////////// Injest Data with Django Rest Framework Views  ////////////////////////
+# from django.http import JsonResponse
+
+
+# def api_home(request, *args, **kwargs): 
+#     data = request.data       # Forbidden (CSRF cookie not set.): /api/
+
+#     return JsonResponse(data)
+
+# 7 ') ///////////// Injest Data with Django Rest Framework Views  ////////////////////////
+# from django.http import JsonResponse
+
+
+# def api_home(request, *args, **kwargs): 
+#     data = request.data    #  Forbidden (CSRF cookie not set.): /api/
+
+#     return JsonResponse(data)
+
+
+# 7 ' ') ///////////// Injest Data with Django Rest Framework Views  ////////////////////////
+from rest_framework.response import Response
+from rest_framework.decorators import api_view 
+
+
+@api_view(["POST"])
+def api_home(request, *args, **kwargs):
+    data = request.data    
+
+    return Response(data)
+
+# 8 ) ///////////// Injest Data with Django Rest Framework Views  ////////////////////////
 from rest_framework.response import Response
 from rest_framework.decorators import api_view 
 from products.serializers import ProductSerializer

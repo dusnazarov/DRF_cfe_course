@@ -5,7 +5,7 @@ import requests
 endpoint = "http://127.0.0.1:8000/api/products/create/"
 
 data = {
-    "title":"This field is dones"
+    "title":"This field is done now 5"    
        
 }
 

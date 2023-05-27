@@ -1,5 +1,5 @@
 
-# ///////////////////////   DRF Class Based View    ///////////////////////
+
 from rest_framework import generics, permissions, authentication
 from .models import Product
 from .serializers import ProductSerializer

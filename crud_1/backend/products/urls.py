@@ -4,31 +4,34 @@ from .import views
 
 # ///////////////////////////////////////////////
 
-# urlpatterns = [
-#     path('list/', views.ProductListCreateAPIView.as_view(), name="product-list"),     
-#     path('<int:pk>/delete/', views.ProductDestroyAPIView.as_view(), name="product-delete"),
-#     path('<int:pk>/update/', views.ProductUpdateAPIView.as_view(), name="product-edit"),
-#     path('<int:pk>/detail/', views.ProductDetailAPIView.as_view(), name="product-detail"),
-# ]
-
-
-# ////////  DRF Mixin and Generic API View  ////////////
-
-# urlpatterns = [
-#     path('list/', views.ProductMixinView.as_view(), name="product-list"),
-#     path('create/', views.ProductMixinView.as_view(), name="product-create" ),  
-#     path('<int:pk>/detail/', views.ProductMixinView.as_view(), name="product-detail"), 
-#     path('<int:pk>/delete/', views.ProductMixinView.as_view(), name="product-delete"), 
-#     path('<int:pk>/update/', views.ProductMixinView.as_view(), name="product-edit"), 
-# ]
-
-# //////////// DRF function based View  //////////////
-
 urlpatterns = [
-    path('list/', views.product_function_view, name="product-list"),
-    path('create/', views.product_function_view, name="product-create"),    
-    path('<int:pk>/detail/', views.product_function_view, name="product-detail"),
-    path('<int:pk>/update/', views.product_function_view, name="product-edit"),
-    path('<int:pk>/delete/', views.product_function_view, name="product-delete"),
 
+    # ////// CRUD Class Based View ( generics ) ////////
+    path('list/', views.ProductListCreateAPIView.as_view(), name="product-list"),     
+    path('create/', views.ProductListCreateAPIView.as_view(), name="product-create"),     
+    path('delete/<int:pk>/', views.ProductDestroyAPIView.as_view(), name="product-delete"),
+    path('update/<int:pk>/', views.ProductUpdateAPIView.as_view(), name="product-edit"),
+    path('detail/<int:pk>/', views.ProductDetailAPIView.as_view(), name="product-detail"),
+
+    # //////   CRUD Class Based View (mixins and generics)
+    path('mlist/', views.ProductCRUDMixinView.as_view(), name="mproduct-list"),
+    path('mcreate/', views.ProductCRUDMixinView.as_view(), name="mproduct-create" ),  
+    path('mdetail/<int:pk>/', views.ProductCRUDMixinView.as_view(), name="mproduct-detail"), 
+    path('mdelete/<int:pk>/', views.ProductCRUDMixinView.as_view(), name="mproduct-delete"), 
+    path('mupdate/<int:pk>/', views.ProductCRUDMixinView.as_view(), name="mproduct-edit"),
+    
+
+    # ////// CRUD  Function Based View   ////////
+    path('flist/', views.product_CRUD_function_view, name="fproduct-list"),
+    path('fcreate/', views.product_CRUD_function_view, name="fproduct-create"),    
+    path('fdetail/<int:pk>/', views.product_CRUD_function_view, name="fproduct-detail"),
+    path('fupdate/<int:pk>/', views.product_CRUD_function_view, name="fproduct-edit"),
+    path('fdelete/<int:pk>/', views.product_CRUD_function_view, name="fproduct-delete"),
+
+    
 ]
+
+
+
+
+

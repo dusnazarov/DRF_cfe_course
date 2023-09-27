@@ -9,7 +9,7 @@ except:
     product_id = None
     print(f'{product_id} not a valid id')
 
-endpoint = f"http://127.0.0.1:8000/products/{product_id}/detail/"
+endpoint = f"http://127.0.0.1:8000/products/detail/{product_id}/"
 
 get_response = requests.get(endpoint)
 print(get_response.json())

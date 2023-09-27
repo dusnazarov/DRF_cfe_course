@@ -1,6 +1,6 @@
 import requests
 
-endpoint = "http://127.0.0.1:8000/products/list/"
+endpoint = "http://127.0.0.1:8000/products/create/"
 
 data = {
     "title":"This field is done now 8",

@@ -8,28 +8,25 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 
 
-# # //////////////////////////////////////////////////////
 
+
+# ////// CRUD Class Based View ( generics ) ////////
 class ProductListCreateAPIView(      
-    generics.ListCreateAPIView,
-    
-    ):
+    generics.ListCreateAPIView):  
     
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
   
     
 class ProductDetailAPIView(    
-    generics.RetrieveAPIView,
-    ):
+    generics.RetrieveAPIView ):
      
     queryset = Product.objects.all()
     serializer_class = ProductSerializer        
 
 
 class ProductDestroyAPIView(
-    generics.DestroyAPIView
-    ):
+    generics.DestroyAPIView ):   
     
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -37,17 +34,15 @@ class ProductDestroyAPIView(
     
     
 class ProductUpdateAPIView(    
-    generics.UpdateAPIView
-    ):
+    generics.UpdateAPIView):
+    
     
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    lookup_field = 'pk' 
-    
+    # lookup_field = 'pk'   
  
-# //////////////////////////////////////
-
-class ProductMixinView (
+# ////////////////  CRUD Class Based View (mixins and generics) //////////////////////
+class ProductCRUDMixinView (
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
@@ -77,16 +72,20 @@ class ProductMixinView (
         return self.destroy(request, *args, **kwargs) 
 
 
-# ///////////////////////////////////////
+# # ////// CRUD  Function Based View   ////////
 
 @api_view(['GET','POST','PUT', 'DELETE'])
-def product_function_view(request, pk=None, *args, **kwargs):
+def product_CRUD_function_view(request, pk=None, *args, **kwargs):
         
     if request.method == "GET": 
         if pk is not None:
-           obj = get_object_or_404(Product, pk=pk)
-           serializer = ProductSerializer(obj, many=False)
-           return Response(serializer.data)
+           product = get_object_or_404(Product, pk=pk)
+           serializer = ProductSerializer(instance=product, many=False)
+           response = {
+               "message":"Product Detail",
+                "data":serializer.data
+               }
+           return Response(data=response, status=status.HTTP_200_OK)
              
         queryset = Product.objects.all()
         serializer = ProductSerializer(queryset, many=True)

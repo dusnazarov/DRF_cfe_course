@@ -23,13 +23,12 @@ from .models import Product
 #         instance.save()        
 #         return instance
 
-
-## //////////////////////////////////////
+# # //////////////////////////////////////
 
 class ProductSerializer(serializers.ModelSerializer):  
     class Meta:
         model = Product
-        fields = ['id','title', 'content', 'price']
+        fields = ['pk','title', 'content', 'price']
 
     
      

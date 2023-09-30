@@ -11,6 +11,9 @@ except:
 
 endpoint = f"http://127.0.0.1:8000/products/detail/{product_id}/"
 
+# /////////// ModelViewSet //////////////
+endpoint = f"http://127.0.0.1:8000/viewsets/products/{product_id}"
+
 get_response = requests.get(endpoint)
 print(get_response.json())
 
